@@ -69,7 +69,7 @@ public class VkPostParseService implements PostParseService {
         return posts.stream()
                 .map(p -> {
                     String postContent = p.getContent();
-                    List<String> postPhoto = getClearPostPhotoRefs(p.getPhotos());
+                    List<String> postPhoto = clearPhotoRefs(p.getPhotos());
                     List<String> postVideo = getPostVideoRefs(p.getVideos());
                     String postLikeCount = p.getLikeCount();
 
@@ -94,7 +94,7 @@ public class VkPostParseService implements PostParseService {
                 }).collect(toList());
     }
 
-    private List<String> getClearPostPhotoRefs(List<String> photoRefs){
+    private List<String> clearPhotoRefs(List<String> photoRefs){
         return photoRefs.stream()
                 .map(r -> r.split(PHOTO_REF_DELIMITER)[PHOTO_REF_INDEX])
                 .collect(toList());
