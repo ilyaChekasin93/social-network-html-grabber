@@ -1,0 +1,18 @@
+vkontakte:
+  resource:
+    url: https://m.vk.com
+    postQueryParamName: offset
+    queryParams:
+      own: 1
+
+  post:
+    locators:
+      baseNode: .//*[@class='wall_item']
+      textContentNode: .//*[@class='pi_text']
+      photoNode: .//*[contains(@class,'photo')]//*[@data-src_big]
+      videoPageRefNode: .//*[contains(@href,'video')]
+      videoRefNode: .//*[@type='video/mp4']
+      likeNode: .//*[@class="v_like"]
+      photoRefAttributeName: data-src_big
+      videoPageRefAttributeName: href
+      videoRefAttributeName: src

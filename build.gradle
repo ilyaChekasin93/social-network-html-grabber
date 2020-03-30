@@ -1,0 +1,45 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+group 'com.github.ilyaChekasin93'
+version '1.0-SNAPSHOT'
+
+
+sourceCompatibility = 1.8
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+ext {
+    springVersion = '2.2.5.RELEASE'
+    htmlcleanerVersion = '2.23'
+    lombokVersion = '1.18.20'
+    mapstructVersion = '1.3.1.Final'
+    springfoxSwaggerVersion = '2.9.2'
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-parent:$springVersion")
+    implementation("org.springframework.boot:spring-boot-starter-web:$springVersion")
+    implementation("net.sourceforge.htmlcleaner:htmlcleaner:$htmlcleanerVersion")
+    implementation("io.springfox:springfox-swagger2:$springfoxSwaggerVersion")
+    implementation("io.springfox:springfox-swagger-ui:$springfoxSwaggerVersion")
+
+    implementation("org.mapstruct:mapstruct:$mapstructVersion")
+
+    compileOnly("org.mapstruct:mapstruct-processor:$mapstructVersion")
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+    annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+}
