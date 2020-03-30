@@ -1,0 +1,10 @@
+target/
+.idea/
+.gradle/
+build/
+out/
+gradle/
+social-network-grabber.iml
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
