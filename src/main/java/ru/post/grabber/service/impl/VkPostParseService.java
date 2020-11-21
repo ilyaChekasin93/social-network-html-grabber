@@ -44,11 +44,10 @@ public class VkPostParseService implements PostParseService {
         this.queryParams = options.getQueryParams();
     }
 
-
     public List<PostDto> getPosts(String publicName, int postQuantity) {
         List<PostDto> posts = new ArrayList<>();
 
-        while (posts.size() < postQuantity){
+        while (posts.size() < postQuantity) {
             client.addQueryParams(queryParams);
             client.addQueryParam(postQueryParamName, String.valueOf(posts.size()));
 
@@ -56,14 +55,14 @@ public class VkPostParseService implements PostParseService {
             HtmlPage page = client.getPage(url);
             List<PostDto> receivedPosts = pageParser.getPosts(page);
 
-            if(receivedPosts.size() == 0){
+            if (receivedPosts.size() == 0) {
                 break;
             }
 
             posts.addAll(receivedPosts);
         }
 
-        if(posts.size() != postQuantity)
+        if (posts.size() != postQuantity)
             posts = posts.stream().limit(postQuantity).collect(toList());
 
         return posts.stream()
@@ -78,7 +77,7 @@ public class VkPostParseService implements PostParseService {
 
     }
 
-    public PostDto getLastPost(String publicName){
+    public PostDto getLastPost(String publicName) {
         client.addQueryParams(queryParams);
         String url = String.format("%s/%s", baseUrl, publicName);
         HtmlPage page = client.getPage(url);
@@ -86,7 +85,7 @@ public class VkPostParseService implements PostParseService {
         return pageParser.getLastPost(page);
     }
 
-    private List<String> getPostVideoRefs(List<String> videoRefs){
+    private List<String> getPostVideoRefs(List<String> videoRefs) {
         return videoRefs.stream()
                 .map(v -> {
                     HtmlPage page = client.getPage(baseUrl + v);
@@ -94,7 +93,7 @@ public class VkPostParseService implements PostParseService {
                 }).collect(toList());
     }
 
-    private List<String> clearPhotoRefs(List<String> photoRefs){
+    private List<String> clearPhotoRefs(List<String> photoRefs) {
         return photoRefs.stream()
                 .map(r -> r.split(PHOTO_REF_DELIMITER)[PHOTO_REF_INDEX])
                 .collect(toList());

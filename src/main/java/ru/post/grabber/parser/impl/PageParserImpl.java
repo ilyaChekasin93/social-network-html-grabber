@@ -28,7 +28,7 @@ public class PageParserImpl implements PageParser {
     String likeNodeLocator;
 
 
-    public PageParserImpl(PostLocators options){
+    public PageParserImpl(PostLocators options) {
         this.postNodeLocator = options.getPostNodeLocator();
         this.textContentNodeLocator = options.getTextContentNodeLocator();
         this.photoNodeLocator = options.getPhotoNodeLocator();
@@ -60,27 +60,27 @@ public class PageParserImpl implements PageParser {
         return new PostDto(postTextContent, postPhotos, postVideos, postLikeCount);
     }
 
-    public String getServerVideoRefs(HtmlPage page){
+    public String getServerVideoRefs(HtmlPage page) {
         return page.getBodyElement(videoRefNodeLocator).getAttribute(videoRefAttributeName);
     }
 
-    private List<String> getPhotoRefs(HtmlElement element){
+    private List<String> getPhotoRefs(HtmlElement element) {
         return element.getElements(photoNodeLocator).stream()
                 .map(el -> el.getAttribute(photoRefAttribute))
                 .collect(Collectors.toList());
     }
 
-    private List<String> getVideoRefs(HtmlElement element){
+    private List<String> getVideoRefs(HtmlElement element) {
         return element.getElements(videoPageRefNodeLocator).stream()
                 .map(vel -> vel.getAttribute(videoPageRefAttributeName))
                 .collect(Collectors.toList());
     }
 
-    private String getTextContent(HtmlElement element){
+    private String getTextContent(HtmlElement element) {
         return element.getElement(textContentNodeLocator).getText();
     }
 
-    private String getLikeCount(HtmlElement element){
+    private String getLikeCount(HtmlElement element) {
         return element.getElement(likeNodeLocator).getText();
     }
 

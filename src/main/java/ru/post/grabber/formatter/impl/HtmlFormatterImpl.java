@@ -12,6 +12,7 @@ import ru.post.grabber.html.element.impl.RootHtmlElementImpl;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+
 @Component
 public class HtmlFormatterImpl implements HtmlFormatter {
 

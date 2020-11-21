@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.post.grabber.params.post.PostLocators;
 
+
 @Getter
 @Component
 @FieldDefaults(level = AccessLevel.PRIVATE)

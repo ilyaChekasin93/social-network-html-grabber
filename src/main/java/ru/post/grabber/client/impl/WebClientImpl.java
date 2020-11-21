@@ -35,7 +35,7 @@ public class WebClientImpl implements WebClient {
 
 
     public WebClientImpl(RestTemplateBuilder restTemplateBuilder, ErrorHandler errorHandler, HtmlFormatter formatter) {
-        this.restTemplate = restTemplateBuilder.build();
+        restTemplate = restTemplateBuilder.build();
         restTemplate.setErrorHandler(errorHandler);
 
         queryParams = new HashMap<>();
@@ -44,29 +44,29 @@ public class WebClientImpl implements WebClient {
         this.formatter = formatter;
     }
 
-    public void addQueryParam(String name, String value){
+    public void addQueryParam(String name, String value) {
         queryParams.put(name, value);
     }
 
-    public void addQueryParams(Map<String,String> params){
+    public void addQueryParams(Map<String, String> params) {
         queryParams.putAll(params);
     }
 
-    public void addHeader(String name, String value){
+    public void addHeader(String name, String value) {
         headers.add(name, value);
     }
 
 
-    public HtmlPage getPage(String url){
+    public HtmlPage getPage(String url) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url);
 
-        queryParams.entrySet().stream()
-                .forEach(p -> uriBuilder.queryParam(p.getKey(), p.getValue()));
+        queryParams.forEach(uriBuilder::queryParam);
 
         String requestUrl = uriBuilder.toUriString();
         HttpEntity httpEntity = new HttpEntity(headers);
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(requestUrl, HttpMethod.GET, httpEntity, String.class);
+        ResponseEntity<String> responseEntity =
+                restTemplate.exchange(requestUrl, HttpMethod.GET, httpEntity, String.class);
 
         queryParams.clear();
 

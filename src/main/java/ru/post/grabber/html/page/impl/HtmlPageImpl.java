@@ -26,19 +26,19 @@ public class HtmlPageImpl implements HtmlPage {
         head = rootElement.getElement(HEAD);
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return head.getElement(TITLE).getText();
     }
 
-    public List<HtmlElement> getMeta(){
+    public List<HtmlElement> getMeta() {
         return head.getElements(META);
     }
 
-    public List<HtmlElement> getBodyElements(String xPath){
+    public List<HtmlElement> getBodyElements(String xPath) {
         return body.getElements(xPath);
     }
 
-    public HtmlElement getBodyElement(String xPath){
+    public HtmlElement getBodyElement(String xPath) {
         return body.getElement(xPath);
     }
 

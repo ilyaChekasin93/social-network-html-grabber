@@ -6,6 +6,7 @@ import org.w3c.dom.NodeList;
 import java.util.AbstractList;
 import java.util.List;
 
+
 public class NodeMapper {
 
     public static List<Node> nodes2ListNode(final NodeList list) {

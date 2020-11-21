@@ -4,6 +4,7 @@ import ru.post.grabber.html.element.HtmlElement;
 
 import java.util.List;
 
+
 public interface HtmlPage {
 
     String getTitle();

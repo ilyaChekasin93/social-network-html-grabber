@@ -1,5 +1,6 @@
 package ru.post.grabber.params.post;
 
+
 public interface PostLocators {
 
     String getPostNodeLocator();

@@ -22,7 +22,7 @@ public class VkPostController {
 
     PostMapper mapper;
 
-    public VkPostController(PostParseService service, PostMapper mapper){
+    public VkPostController(PostParseService service, PostMapper mapper) {
         this.service = service;
         this.mapper = mapper;
     }

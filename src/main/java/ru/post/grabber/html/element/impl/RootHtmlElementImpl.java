@@ -30,8 +30,9 @@ public class RootHtmlElementImpl implements RootHtmlElement {
         NodeList nodeList = executeExpression(xPath);
 
         return NodeMapper
-                .nodes2ListNode(nodeList).stream()
-                .map(n -> new HtmlElementImpl(n))
+                .nodes2ListNode(nodeList)
+                .stream()
+                .map(HtmlElementImpl::new)
                 .collect(Collectors.toList());
     }
 
