@@ -4,7 +4,7 @@ target/
 build/
 out/
 gradle/
-social-network-grabber.iml
+social-network-html-grabber.iml
 gradle-app.setting
 !gradle-wrapper.jar
 .gradletasknamecache
