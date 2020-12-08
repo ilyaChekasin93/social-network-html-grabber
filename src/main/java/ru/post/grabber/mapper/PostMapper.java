@@ -13,8 +13,8 @@ public interface PostMapper {
 
     PostResponse postDto2Post(PostDto postDto);
 
-    default List<PostResponse> postDtos2Posts(List<PostDto> postDtos){
-        return postDtos.stream()
+    default List<PostResponse> postDtoList2Posts(List<PostDto> postDtoList) {
+        return postDtoList.stream()
                 .map(p -> postDto2Post(p))
                 .collect(Collectors.toList());
     }

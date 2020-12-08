@@ -22,15 +22,14 @@ public class RootHtmlElementImpl implements RootHtmlElement {
 
     private static final int FIRST_ELEMENT_INDEX = 0;
 
-    public RootHtmlElementImpl(Node node){
+    public RootHtmlElementImpl(Node node) {
         this.node = node;
     }
 
     public List<HtmlElement> getElements(String xPath) {
         NodeList nodeList = executeExpression(xPath);
 
-        return NodeMapper
-                .nodes2ListNode(nodeList)
+        return NodeMapper.nodes2ListNode(nodeList)
                 .stream()
                 .map(HtmlElementImpl::new)
                 .collect(Collectors.toList());

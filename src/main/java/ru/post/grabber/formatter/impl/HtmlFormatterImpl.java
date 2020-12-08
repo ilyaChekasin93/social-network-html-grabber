@@ -16,7 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
 @Component
 public class HtmlFormatterImpl implements HtmlFormatter {
 
-    public RootHtmlElement clean(String html){
+    public RootHtmlElement clean(String html) {
         HtmlCleaner htmlCleaner = new HtmlCleaner();
         TagNode tagNode = htmlCleaner.clean(html);
         CleanerProperties cleanerProperties = new CleanerProperties();

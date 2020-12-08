@@ -13,8 +13,11 @@ import java.util.List;
 public class HtmlPageImpl implements HtmlPage {
 
     static final String BODY = ".//body";
+
     static final String HEAD = ".//head";
+
     static final String META = ".//meta";
+
     static final String TITLE = ".//title";
 
     private HtmlElement body;

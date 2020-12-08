@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.post.grabber.client.WebClient;
-import ru.post.grabber.client.impl.handler.ErrorHandler;
+import ru.post.grabber.client.impl.handler.DefaultErrorHandler;
 import ru.post.grabber.formatter.HtmlFormatter;
 import ru.post.grabber.html.element.RootHtmlElement;
 import ru.post.grabber.html.page.HtmlPage;
@@ -34,9 +34,9 @@ public class WebClientImpl implements WebClient {
     HttpHeaders headers;
 
 
-    public WebClientImpl(RestTemplateBuilder restTemplateBuilder, ErrorHandler errorHandler, HtmlFormatter formatter) {
+    public WebClientImpl(RestTemplateBuilder restTemplateBuilder, DefaultErrorHandler defaultErrorHandler, HtmlFormatter formatter) {
         restTemplate = restTemplateBuilder.build();
-        restTemplate.setErrorHandler(errorHandler);
+        restTemplate.setErrorHandler(defaultErrorHandler);
 
         queryParams = new HashMap<>();
         headers = new HttpHeaders();

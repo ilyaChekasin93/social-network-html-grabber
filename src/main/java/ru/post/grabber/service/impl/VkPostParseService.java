@@ -45,36 +45,14 @@ public class VkPostParseService implements PostParseService {
     }
 
     public List<PostDto> getPosts(String publicName, int postQuantity) {
-        List<PostDto> posts = new ArrayList<>();
+        List<PostDto> posts = getPublicPosts(publicName, postQuantity);
 
-        while (posts.size() < postQuantity) {
-            client.addQueryParams(queryParams);
-            client.addQueryParam(postQueryParamName, String.valueOf(posts.size()));
-
-            String url = String.format("%s/%s", baseUrl, publicName);
-            HtmlPage page = client.getPage(url);
-            List<PostDto> receivedPosts = pageParser.getPosts(page);
-
-            if (receivedPosts.size() == 0) {
-                break;
-            }
-
-            posts.addAll(receivedPosts);
-        }
-
-        if (posts.size() != postQuantity)
-            posts = posts.stream().limit(postQuantity).collect(toList());
-
-        return posts.stream()
-                .map(p -> {
-                    String postContent = p.getContent();
-                    List<String> postPhoto = clearPhotoRefs(p.getPhotos());
-                    List<String> postVideo = getPostVideoRefs(p.getVideos());
-                    String postLikeCount = p.getLikeCount();
-
-                    return new PostDto(postContent, postPhoto, postVideo, postLikeCount);
-                }).collect(toList());
-
+        return posts.stream().peek(post -> {
+            List<String> postPhoto = clearPhotoRefs(post.getPhotos());
+            List<String> postVideos = getPostVideoRefs(post.getVideos());
+            post.setPhotos(postPhoto);
+            post.setVideos(postVideos);
+        }).collect(toList());
     }
 
     public PostDto getLastPost(String publicName) {
@@ -85,10 +63,38 @@ public class VkPostParseService implements PostParseService {
         return pageParser.getLastPost(page);
     }
 
+    private List<PostDto> getPublicPosts(String publicName, int quantity) {
+        List<PostDto> posts = new ArrayList<>();
+
+        while (posts.size() < quantity) {
+            HtmlPage page = getPostsPage(publicName, posts.size());
+            List<PostDto> receivedPosts = pageParser.getPosts(page);
+
+            if (receivedPosts.size() == 0)
+                break;
+
+            posts.addAll(receivedPosts);
+        }
+
+        if (posts.size() != quantity)
+            posts = posts.stream().limit(quantity).collect(toList());
+
+        return posts;
+    }
+
+    private HtmlPage getPostsPage(String publicName, int postListSize) {
+        client.addQueryParams(queryParams);
+        client.addQueryParam(postQueryParamName, String.valueOf(postListSize));
+        String url = String.format("%s/%s", baseUrl, publicName);
+
+        return client.getPage(url);
+    }
+
     private List<String> getPostVideoRefs(List<String> videoRefs) {
         return videoRefs.stream()
                 .map(v -> {
                     HtmlPage page = client.getPage(baseUrl + v);
+
                     return pageParser.getServerVideoRefs(page);
                 }).collect(toList());
     }

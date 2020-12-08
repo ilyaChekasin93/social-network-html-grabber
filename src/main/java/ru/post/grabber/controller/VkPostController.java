@@ -30,7 +30,7 @@ public class VkPostController {
     @GetMapping(path = "/posts")
     public List<PostResponse> getPosts(String group, Integer quantity) {
         List<PostDto> postDtoList = service.getPosts(group, quantity);
-        return mapper.postDtos2Posts(postDtoList);
+        return mapper.postDtoList2Posts(postDtoList);
     }
 
     @GetMapping(path = "/post")

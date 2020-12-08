@@ -8,21 +8,22 @@ public class HtmlElementImpl extends RootHtmlElementImpl implements HtmlElement 
 
     private static final String EMPTY_VALUE = "";
 
-    public HtmlElementImpl(Node node){
+    public HtmlElementImpl(Node node) {
         super(node);
     }
 
-    public String getText(){
+    public String getText() {
         return node != null ? node.getTextContent() : EMPTY_VALUE;
     }
 
-    public String getAttribute(String name){
+    public String getAttribute(String name) {
         String result;
         try {
             result = node.getAttributes().getNamedItem(name).getNodeValue();
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             result = EMPTY_VALUE;
         }
+
         return result;
     }
 

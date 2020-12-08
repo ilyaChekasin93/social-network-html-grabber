@@ -18,13 +18,21 @@ import java.util.stream.Collectors;
 public class PageParserImpl implements PageParser {
 
     String postNodeLocator;
+
     String textContentNodeLocator;
+
     String photoNodeLocator;
+
     String photoRefAttribute;
+
     String videoPageRefNodeLocator;
+
     String videoPageRefAttributeName;
+
     String videoRefNodeLocator;
+
     String videoRefAttributeName;
+
     String likeNodeLocator;
 
 
